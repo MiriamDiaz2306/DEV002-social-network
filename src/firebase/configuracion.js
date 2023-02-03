@@ -1,14 +1,41 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-console */
+/* eslint-disable no-shadow */
 // Importa la biblioteca de Firebase
 // eslint-disable-next-line import/no-unresolved
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js';
 import {
-  createUserWithEmailAndPassword, getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, updateProfile
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signOut,
+  updateProfile,
+  sendEmailVerification,
+  signInWithEmailAndPassword,
+// eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js';
 import {
-  getFirestore, collection, doc, addDoc, getDoc, getDocs, deleteDoc, updateDoc, Timestamp, query, orderBy, onSnapshot, arrayUnion,
+  getFirestore,
+  collection,
+  doc,
+  addDoc,
+  getDoc,
+  getDocs,
+  deleteDoc,
+  updateDoc,
+  Timestamp,
+  query,
+  orderBy,
+  onSnapshot,
+  arrayUnion,
   arrayRemove,
+// eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
+
 // const auth = getAuth();
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyAAHfvbH9LChUrOwAbR4cydwCsmHa7Q330',
@@ -26,22 +53,22 @@ export const provider = new GoogleAuthProvider(app);
 export const db = getFirestore(app);
 export const user = () => auth.currentUser;
 
-
 export const saveTask = (description) => addDoc(collection(db, 'tasks'), {
-
   description,
   name: auth.currentUser.displayName,
   uid: auth.currentUser.uid,
   likes: [],
   createdDateTime: Timestamp.fromDate(new Date()),
 });
+
 export const saveUser = (name, uid, email, pais) => addDoc(collection(db, 'users'), {
   name,
   uid,
   email,
   pais,
-  createdDateTime: Timestamp.fromDate(new Date())
+  createdDateTime: Timestamp.fromDate(new Date()),
 });
+
 export const getTasks = () => getDocs(collection(db, 'tasks'));
 export const deleteTask = (id) => deleteDoc(doc(db, 'tasks', id));
 export const getTask = (id) => getDoc(doc(db, 'tasks', id));
@@ -50,21 +77,24 @@ export const dateTask = (querySnapshot) => {
   const q = query(collection(db, 'tasks'), orderBy('createdDateTime', 'desc'));
   onSnapshot(q, querySnapshot);
 };
+
 // Create new users
+
 export function registerUser(email, password, name, pais, callback) {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      console.log(name)
       updateProfile(auth.currentUser, {
         displayName: name,
+
       });
       // El usuario ha sido registrado correctamente
+      // eslint-disable-next-line no-console
       console.log('Usuario registrado correctamente');
       const user = userCredential.user;
       const userId = user.uid;
       user.displayName = name;
-      console.log(user, userId);
-      saveUser(user.displayName, userId, email, pais)
+      // console.log(user, userId);
+      saveUser(user.displayName, userId, email, pais);
       callback(true);
     })
     .catch((error) => {
@@ -79,9 +109,42 @@ export function registerUser(email, password, name, pais, callback) {
         alert('Completa todos los campos');
       }
       callback(false);
+    })
+    .then(() => {
+      sendEmailVerification(auth.currentUser);
     });
 }
+
+// inicio de sesión con email
+
+export function inicioDeSesionEmail(email, password, callback) {
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      console.log('signed in');
+      const user = userCredential.user;
+      const userId = user.uid;
+      console.log(user, userId);
+      callback(true);
+    // ...
+    })
+    .catch((error) => {
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
+      if (error.code === 'auth/email-already-in-use') {
+        alert('Este correo ya está registrado');
+      } else if (error.code === 'auth/weak-password') {
+        alert('Tu contraseña no es segura');
+      } else if (error.code === 'auth/invalid-email') {
+        alert('Este correo no existe o es inválido');
+      } else if (error.code === 'auth/internal-error') {
+        alert('Completa todos los campos');
+      }
+      callback(false);
+    });
+}
+
 // Sign in with Google
+
 export const authGoogle = async () => {
   try {
     const userResult = await signInWithPopup(auth, provider);
@@ -95,7 +158,6 @@ export const authGoogle = async () => {
     // console.log(error);
   }
 };
-
 
 // Cerrar sesión
 
@@ -112,8 +174,8 @@ export const onAuth = (auth) => {
   });
 };
 
-
 // Like function
+
 export const tapLike = (id, newLike) => {
   updateDoc(doc(db, 'tasks', id), {
     likes:
@@ -121,9 +183,8 @@ export const tapLike = (id, newLike) => {
         newLike,
       ),
   });
-  // .then(() => console.log("+1 like"))
-  // .catch((error) => console.error("Error", error));
 };
+
 export const dislike = (id, oldLike) => {
   updateDoc(doc(db, 'tasks', id), {
     likes:
@@ -131,9 +192,8 @@ export const dislike = (id, oldLike) => {
         oldLike,
       ),
   });
-  // .then(() => console.log("-1 like"))
-  // .catch((error) => console.error("Error", error));
 };
+
 export {
   createUserWithEmailAndPassword,
   collection,

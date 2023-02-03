@@ -2,19 +2,19 @@
 // import { onNavigate } from "../../main.js";
 import { registerUser } from '../firebase/configuracion.js';
 import { next } from '../main.js';
+
 export const Register = () => {
   const divRegister = document.createElement('div');
   divRegister.setAttribute('class', 'container-div-register');
   const viewRegister = `<div class="containerRegister" id="containerRegister">
   <figure class="logo-inicio-sesion">
-    <img class="logo" src="./images/logo.png" alt="Imagen de un avión dando la vuelta al mundo">
+   <img class="logo" src="./images/logo.png" alt="Imagen de un avión dando la vuelta al mundo">
   </figure>
+  
+<section class="section-register" id="sectionOne">
+ <h1 class="title">Journey Mates 🛫 </h1>
+ <h2 class="inicia-sesion-h2">Regístrate</h2>
 
- <section class="section-register" id="sectionOne">  
-
-  <h1 class="title">Journey Mates 🛫 </h1>
-
-  <h2 class="inicia-sesion-h2">Regístrate</h2>
 
   <form id="userForm">
   <input type="name" id="name-usuaria" class="name" placeholder="Nombre completo*" autocomplete="name" required> <br>

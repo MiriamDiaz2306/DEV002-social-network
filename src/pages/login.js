@@ -1,7 +1,9 @@
+/* eslint-disable no-console */
+/* eslint-disable no-restricted-globals */
 // import { onNavigate, next } from '../main.js';
-import { inicioDeSesionEmail } from './inicioDeSesionCorreo.js';
+// import { inicioDeSesionEmail } from './inicioDeSesionCorreo';
 // import { signInWithGoogle } from '../firebase/singInGoogle.js';
-import { authGoogle } from '../firebase/configuracion.js';
+import { authGoogle, inicioDeSesionEmail } from '../firebase/configuracion.js';
 // eslint-disable-next-line import/no-cycle
 import { next } from '../main.js';
 
@@ -57,7 +59,7 @@ export const Login = () => {
     const googleButton = document.getElementById('inicio-sesion-google');
     googleButton.addEventListener('click', async (event) => {
       event.preventDefault();
-      console.log('click botón google');
+      // console.log('click botón google');
       await authGoogle();
     });
   });
