@@ -1,40 +1,39 @@
-// Este es el punto de entrada de tu aplicacion
+// eslint-disable-next-line import/no-cycle
+import { Login } from './pages/login.js';
+// eslint-disable-next-line import/no-cycle, import/no-unresolved
+import { Register } from './pages/Register.js';
+import { timeLine } from './pages/timeLine.js';
+import { profile } from './pages/profile.js';
 
- //import { registerUser } from './index.js';
+const root = document.getElementById('root');
+const routes = {
+  '/': Login,
+  '/login': Login,
+  '/register': Register,
+  '/timeLine': timeLine,
+  '/profile': profile,
+};
 
-// myFunction();
+export const next = (pathname) => {
+  window.history.pushState({}, pathname, window.location.origin + pathname);
+  root.innerHTML = '';
+  root.appendChild(routes[pathname]());
+};
 
-const indexRegistro = document.getElementById('containerRegister');
-const indexInicioSesion = document.getElementById('container');
-const btnRegistrate = document.getElementById('registrate')
+export const onNavigate = (pathname) => {
+  window.history.pushState(
+    {},
+    pathname,
+    window.location.origin + pathname,
+  );
+  root.removeChild(root.firstChild);
+  root.appendChild(routes[pathname]());
+};
+const component = routes[window.location.pathname];
 
-btnRegistrate.addEventListener('click', () => {
-  console.log("click")
-  indexInicioSesion.style.display = "none";
-  indexRegistro.style.display = "block";
-});
+window.onpopstate = () => {
+  root.removeChild(root.firstChild);
+  root.append(component());
+};
 
-// Obtén el botón de registro y asigna un evento click
-const registerButton = document.getElementById('register-button');
-registerButton.addEventListener('click', () => {
-  // Obtén el correo y la contraseña de los inputs
-  const email = document.getElementById('emailRegister').value;
-  const password = document.getElementById('passwordRegister').value;
-  // Llama a la función de registro
-  registerUser(email, password);
-});
-// function registrar () {
-//     let btnIngresar = document.getElementById('ingresar')
-//     let email = document.getElementById('email').value;
-//     let contrasena = document.getElementById('password').value;
-
-//     btnIngresar.addEventListener('click', () => {
-//         console.log(email)
-//         console.log(contrasena)
-//     });
-// }
-
-// window.addEventListener('load', registrar);
-
-// Obtén el botón de registro y asigna un evento click
-
+root.appendChild(component());
