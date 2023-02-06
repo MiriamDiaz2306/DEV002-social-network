@@ -33,7 +33,6 @@ window.addEventListener('DOMContentLoaded', async () => {
       };
       likeImg();
 
-
       // console.log(auth.currentUser);
 
       html += `
