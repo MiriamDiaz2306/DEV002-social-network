@@ -94,11 +94,3 @@ export const Register = () => {
   return divRegister;
 };
 export default Register;
-
-
-
-
-
-
-
-

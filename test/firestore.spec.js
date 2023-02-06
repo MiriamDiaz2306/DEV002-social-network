@@ -74,8 +74,7 @@ jest.mock('../src/firebase/configuracion.js', () => {
             }
             return Promise.resolve({ user: 'admin' });
         }),
-
-        deleteTask: jest.fn((id) => {
+ deleteTask: jest.fn((id) => {
             if (!id) {
                 throw new Error('ERROR');
             }

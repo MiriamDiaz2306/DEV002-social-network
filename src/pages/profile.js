@@ -1,7 +1,7 @@
 export const profile = () => {
-    const divProfile = document.createElement('div');
-    divProfile.setAttribute('class', 'container-div-profile');
-    const viewProfile = `
+  const divProfile = document.createElement('div');
+  divProfile.setAttribute('class', 'container-div-profile');
+  const viewProfile = `
       <header class="contenedor-nav"> 
           <li class="perfil-nav"> Perfil </li> 
           <li> 
@@ -53,6 +53,6 @@ export const profile = () => {
       </section>
    
     `;
-    divProfile.innerHTML = viewProfile;
-    return divProfile;
-  };
+  divProfile.innerHTML = viewProfile;
+  return divProfile;
+};
