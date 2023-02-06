@@ -15,8 +15,6 @@
 
 
 ***
-@@ -213,7 +212,7 @@ para interactuar con las publicaciones.
-![img](./src/images/4.png)
 
 ## i. Acerca de Journey Mates
 El proyecto _"Journey Mates"_ surge con la finalidad de brindar a las usuarias que disfrutan de viajar y conocer nuevos lugares en Latinoamerica, una red social en la cual, podrán compartir sus experiencias y recomendaciones, y descubrir a través de las recomendaciones de otras usuarias, nuevos lugares, ciudades y otros sitios de interés. 
@@ -118,6 +116,8 @@ para interactuar con las publicaciones.
 * Prototipo de baja fidelidad
 ![img](./src/images/Prototipo%20de%20baja_mobile.JPG)
 ![img](./src/images/Prototipo%20de%20baja_desktop.JPG)
+
+
 * Prototipo de alta fidelidad
 ![img](./src/images/1.png)
 ![img](./src/images/3.png)
