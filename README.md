@@ -114,9 +114,9 @@ para interactuar con las publicaciones.
     *Cada publicación cuenta con un logo que al momento de darle click, se agrega un like al conteo.
 ## iii. Prototipos
 * Prototipo de baja fidelidad
+
 ![img](./src/images/Prototipo%20de%20baja_mobile.JPG)
 ![img](./src/images/Prototipo%20de%20baja_desktop.JPG)
-
 
 * Prototipo de alta fidelidad
 ![img](./src/images/1.png)
