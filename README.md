@@ -221,8 +221,8 @@ Nuestras Historias de Usuario fueron 8:
 
  * Prototipo de baja fidelidad
 
-  ![img](./src/images/Prototipo%20de%20baja_mobile.JPG)
-  ![img](./src/images/Prototipo%20de%20baja_desktop.JPG)
+![img](./src/images/Prototipo%20de%20baja_mobile.JPG)
+![img](./src/images/Prototipo%20de%20baja_desktop.JPG)
 
  * Prototipo de alta fidelidad
 
@@ -241,7 +241,7 @@ Nuestras Historias de Usuario fueron 8:
 * Usuaria #2:
     Como usuaria de Journey Mates, me gustó especialmente la funcionalidad de dar "like" a las recomendaciones y reseñas de otros viajeros, ya que me permite destacar aquellas que realmente me gustaron. Además, los colores elegidos para la página me parecen adecuados y ayudan a crear una atmósfera acogedora y amigable.
     Sin embargo, me gustaría ver un mapa o imágenes en la página para hacerla más atractiva visualmente. Creo que sería una excelente manera de mostrar los diferentes países de las recomendaciones que se pueden encontrar en la página y hacer que sea más fácil para las usuarias visualizarlos. En general, estoy muy contenta con la experiencia de usuario en Journey Mates, pero creo que un mapa o imágenes añadirían un toque adicional de atractivo visual a la página.
-    
+
 ## v. Proyectos desplegados
 * 💻 Daniela:
 * 💻 Carmen: 
