@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-alert */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-console */
@@ -6,26 +7,26 @@ import {
   saveTask, deleteTask, getTask, updateTask, tapLike, dislike, user, auth, dateTask,
 } from './configuracion.js';
 
-const tasksContainer = document.getElementById('contenedor-publicaciones');
+const tasksContainer = document.getElementById('contenedor-publicaciones');// timeline
 const taskForm = document.getElementById('task-form');
 
-let editStatus = false;
-let id = '';
+let editStatus = false; // bolean para saber si se edita o no
+let id = ''; // Identificador que se esta editando
 
 window.addEventListener('DOMContentLoaded', async () => {
-  dateTask((querySnapshot) => {
+  dateTask((querySnapshot) => { // fecha y hora orden
     let html = '';
 
     querySnapshot.forEach((doc) => {
-      const task = doc.data();
+      const task = doc.data(); // accedemos a la data especifica
       // const fecha=Timestamp.fromDate(new Date())
       const likes = task.likes;
       const likesNumber = likes.length;
       const userId = user().uid;
-      const currentLike = likes.indexOf(userId);
+      const currentLike = likes.indexOf(userId); // devuelve la posición en la lista de un elemento específico
       let likeSrc = '';
       const likeImg = () => {
-        if (currentLike === -1) {
+        if (currentLike === -1) { // currentLike es -1, significa que el usuario no ha dado like
           likeSrc = 'images/like-logo.png';
         } else {
           likeSrc = './images/heart.png';
@@ -33,7 +34,7 @@ window.addEventListener('DOMContentLoaded', async () => {
       };
       likeImg();
 
-      // console.log(auth.currentUser);
+      // console.log(auth.currentUser);Devuelve el ID de usuario único del usuario actualmente autenticado
 
       html += `
                 <div class = 'contenedor-padre'> 
@@ -89,7 +90,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     const btnsDelete = tasksContainer.querySelectorAll('.btn-delete');
     btnsDelete.forEach((btn) => {
       btn.addEventListener('click', ({ target: { dataset } }) => {
-        if (confirm('¿Estás segura de que deseas eliminar esta publicación?')) {
+        if (confirm('¿Estás segura de que deseas eliminar esta publicación?')) { // funcion con un dialogo para confirmar.
           deleteTask(dataset.id);
         }
       });
@@ -98,7 +99,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     const btnsEdit = tasksContainer.querySelectorAll('.btn-edit');
     btnsEdit.forEach((btn) => {
       btn.addEventListener('click', async (e) => {
-        const doc = await getTask(e.target.dataset.id);
+        const doc = await getTask(e.target.dataset.id); // dataset permite acceder a los atributos personalizados.
         console.log(doc.data());
         const task = doc.data();
 
@@ -107,7 +108,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         editStatus = true;
         id = doc.id;
 
-        taskForm['btn-publicar'].innerText = 'Publicar';
+        taskForm['btn-publicar'].innerText = 'Publicar';// cambia para publicar.
       });
     });
   });
@@ -118,7 +119,7 @@ taskForm.addEventListener('submit', (e) => {
 
   const description = taskForm['task-description'];
 
-  if (description.value.trim() === '') {
+  if (description.value.trim() === '') { // para eliminar los espacios en blanco y no se publiquen
     alert('No se pueden publicar campos vacíos :(');
   } else {
     if (!editStatus) {

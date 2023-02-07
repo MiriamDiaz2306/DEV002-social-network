@@ -36,7 +36,7 @@ jest.mock('../src/firebase/configuracion.js', () => {
             return { auth: 'TEST' };
         }),
 
-        addDoc: jest.fn(),
+        addDoc: jest.fn(), // Los mocks se definen utilizando la función
         collection: jest.fn(),
         conFirestore: jest.fn(),
         onSnapshot: jest.fn(),
@@ -118,7 +118,7 @@ describe('Test for saveTask', () => {
 
     it('saveTask should call addDoc with its parameters.', async () => {
       await saveTask('test description')
-      expect(addDoc).toHaveBeenCalledWith('test description')
+      expect(addDoc).toHaveBeenCalledWith('test description') // ha sido llamada con los argumentos específicos
     });
 
 describe('Test for saveUser', () => {

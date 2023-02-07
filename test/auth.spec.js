@@ -21,7 +21,7 @@ import {
   signInWithPopup,
 } from '../src/firebase/configuracion.js';
 
-jest.mock('../src/firebase/configuracion.js', () => {
+jest.mock('../src/firebase/configuracion.js', () => { // biblioteca de pruebas en Javat,crear una versión simulada (mock) de un módulo.
   return {
     auth: jest.fn(() => {
       return { auth: 'TEST' };
@@ -30,7 +30,7 @@ jest.mock('../src/firebase/configuracion.js', () => {
       if (!email || !password) {
         throw new Error('ERROR');
       }
-      return Promise.resolve({ user: 'admin' });
+      return Promise.resolve({ user: 'admin' });// representa la terminación o el fracaso eventual de una operación asíncrona
     }),
     signOutFirebase: jest.fn((auth) => {
       // eslint-disable-next-line prefer-promise-reject-errors

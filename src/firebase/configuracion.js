@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-alert */
 /* eslint-disable no-console */
 /* eslint-disable no-shadow */
@@ -46,21 +47,21 @@ const firebaseConfig = {
   appId: '1:15257223280:web:eecc0cb646124a2f42b4b5',
   measurementId: 'G-4W8ETMYH7S',
 };
-// Inicializa la aplicación de Firebase
+// Inicializa la aplicación de Firebase,  valores de clave necesarios para conectarse y utilizar un proyecto específico en Firebase.
 export const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const provider = new GoogleAuthProvider(app);
-export const db = getFirestore(app);
-export const user = () => auth.currentUser;
-
-export const saveTask = (description) => addDoc(collection(db, 'tasks'), {
+export const auth = getAuth(app);// Obtiene un servicio de autenticación de Firebase a partir de la instancia inicializada
+export const provider = new GoogleAuthProvider(app);// Crea un proveedor de autenticación de Google a partir de la instancia de Firebase.
+export const db = getFirestore(app);// Obtiene un servicio de base de datos de Firestore de Firebase a partir de la instancia inicializada.
+export const user = () => auth.currentUser;// Define una función que devuelve el usuario actualmente autenticado en Firebase.
+// Publicar
+export const saveTask = (description) => addDoc(collection(db, 'tasks'), { // funcion toma como entrada una descripción y agrega un documento a una colección de tareas en Firestor
   description,
   name: auth.currentUser.displayName,
-  uid: auth.currentUser.uid,
+  uid: auth.currentUser.uid, // Identificador único del usuario actual obtenido a través de la autenticación de Firebase.
   likes: [],
   createdDateTime: Timestamp.fromDate(new Date()),
 });
-
+// Guardar la informacion de registro
 export const saveUser = (name, uid, email, pais) => addDoc(collection(db, 'users'), {
   name,
   uid,
@@ -69,17 +70,16 @@ export const saveUser = (name, uid, email, pais) => addDoc(collection(db, 'users
   createdDateTime: Timestamp.fromDate(new Date()),
 });
 
-export const getTasks = () => getDocs(collection(db, 'tasks'));
-export const deleteTask = (id) => deleteDoc(doc(db, 'tasks', id));
-export const getTask = (id) => getDoc(doc(db, 'tasks', id));
-export const updateTask = (id, newFields) => updateDoc(doc(db, 'tasks', id), newFields);
-export const dateTask = (querySnapshot) => {
-  const q = query(collection(db, 'tasks'), orderBy('createdDateTime', 'desc'));
-  onSnapshot(q, querySnapshot);
+export const getTasks = () => getDocs(collection(db, 'tasks'));// Obtiene todos los documentos de la colección de tareas utilizando la función getDocs
+export const deleteTask = (id) => deleteDoc(doc(db, 'tasks', id));// Elimina un documento específico de la colección de tareas utilizando la función deleteDoc con su id.
+export const getTask = (id) => getDoc(doc(db, 'tasks', id));// Obtiene un documento específico de la colección de tareas utilizando la función getDoc con el id.
+export const updateTask = (id, newFields) => updateDoc(doc(db, 'tasks', id), newFields);// Actualiza un documento específico de la colección.
+export const dateTask = (querySnapshot) => { // 0rdena todos los documentos en la colección de tareas por fecha y hora.
+  const q = query(collection(db, 'tasks'), orderBy('createdDateTime', 'desc')); // fecha y orden
+  onSnapshot(q, querySnapshot);// escucha los cambios de la coleccion con la función onSnapshot, querySnapshot contiene información sobre los documentos devueltos por la consulta en tiempo real.
 };
 
-// Create new users
-
+// Create new users, sincrona con callback,secuencial y bloqueará la ejecución del código hasta que se complete.
 export function registerUser(email, password, name, pais, callback) {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
@@ -115,7 +115,7 @@ export function registerUser(email, password, name, pais, callback) {
     });
 }
 
-// inicio de sesión con email
+// inicio de sesión con email,asíncrona, la función no bloqueará el hilo principal yse espera la operación
 export async function inicioDeSesionEmail(email, password) {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -138,7 +138,7 @@ export async function inicioDeSesionEmail(email, password) {
   }
 }
 
-// Sign in with Google
+// Sign in with Google, inicia de sesion con un provedor de autentificacion.
 
 export const authGoogle = async () => {
   try {
@@ -174,7 +174,7 @@ export const onAuth = (auth) => {
 export const tapLike = (id, newLike) => {
   updateDoc(doc(db, 'tasks', id), {
     likes:
-      arrayUnion(
+      arrayUnion( // función de Firebase que permite agregar un nuevo elemento a un campo en la base de datos
         newLike,
       ),
   });
@@ -183,7 +183,7 @@ export const tapLike = (id, newLike) => {
 export const dislike = (id, oldLike) => {
   updateDoc(doc(db, 'tasks', id), {
     likes:
-      arrayRemove(
+      arrayRemove( // permite eliminar un elemento específico de un campo en la base de datos que está configurado como un arreglo
         oldLike,
       ),
   });

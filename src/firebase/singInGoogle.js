@@ -7,6 +7,9 @@ import { signInWithPopup, GoogleAuthProvider } from 'https://www.gstatic.com/fir
 // const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
+// eslint-disable-next-line max-len
+// iniciar sesión con una cuenta de Google mediante "signInWithPopup" y en caso de error, imprime el código de error.
+
 export const authGoogle = async () => {
   try {
     const userResult = await signInWithPopup(auth, provider);
@@ -19,16 +22,16 @@ export const authGoogle = async () => {
     console.log(errorCode, errorMessage, correo, credential);
   }
 };
-
+// crea una credencial de un inicio de sesión exitoso.
 export const signInWithGoogle = async (callback) => {
   try {
     const result = await signInWithPopup(auth, provider);
     const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
+    const token = credential.accessToken; // para identificar que todo es seguro
     const user = result.user;
     const email = result.user.email;
     console.log('signed in');
-    callback(true);
+    callback(true); // si todo es correcto
   } catch (error) {
     const credential = GoogleAuthProvider.credentialFromError(error);
     callback(false);
@@ -38,4 +41,5 @@ export const signInWithGoogle = async (callback) => {
 export {
   signInWithPopup,
   GoogleAuthProvider,
+
 };

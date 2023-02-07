@@ -11,7 +11,7 @@ import { next } from '../main.js';
 
 export const Login = () => {
   const divLogin = document.createElement('div');
-  divLogin.setAttribute('id', 'container-div-login');
+  divLogin.setAttribute('id', 'container-div-login'); // establecer o modificar un atributo de un elemento.
   const viewLogin = `
 <div class="container" id="container"> 
   <figure class="logo-inicio-sesion"> 
@@ -45,7 +45,7 @@ export const Login = () => {
   document.addEventListener('DOMContentLoaded', async () => {
     const logInButton = document.getElementById('ingresar');
     logInButton.addEventListener('click', async (event) => {
-      event.preventDefault();
+      event.preventDefault();// prevenir la acción por defecto.
       console.log('click se ejecutó');
 
       const email = document.getElementById('email').value;
@@ -72,7 +72,7 @@ export const Login = () => {
     });
   });
 
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', () => { // segurarse de que el código Jv se ejecute después de que el DOM disponible y listo
     const googleButton = document.getElementById('inicio-sesion-google');
     googleButton.addEventListener('click', async (event) => {
       event.preventDefault();
